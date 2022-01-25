@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Site</title>
+
+    <style>
+      body {
+        background-color: darkslategrey;
+        color: floralwhite;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: large;
+        align-content: center;
+      }
+      .c {
+        align-items: center;
+        padding: 20px;
+      }
+      input {
+        padding: 5px;
+        background-color: gray;
+        color: floralwhite;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: large;
+        border-style: hidden;
+        border-radius: 5px;
+      }
+      a{
+          color:honeydew;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="c">
+      <label for="fname">Movie title:</label><br />
+      <input type="text" id="title" name="title" /><br />
+      <label for="lname">Description:</label><br />
+      <input type="text" id="desc" name="desc" /><br />
+      <label for="fname">Price:</label><br />
+      <input type="text" id="price" name="price" /><br />
+      <label for="lname">Release Date:</label><br />
+      <input type="text" id="release" name="release" />
+      <br />
+      <br />
+      <button id="btn">Submit</button>
+      <br>
+
+      <br>
+
+      <a href="/movies.rss">Subscribe to our RSS feed!</a>
+      <a href="/movies.ATOM">Subscribe to our ATOM feed!</a>
+    </div>
+    <script>
+      let apiurl = "http://127.0.0.1:5000/addmovie";
+      let title = document.getElementById("title");
+      let desc = document.getElementById("desc");
+      let price = document.getElementById("price");
+      let release = document.getElementById("release");
+      let btn = document.getElementById("btn");
+      btn.addEventListener("click", function () {
+        console.log("clicked");
+        console.log(title.value);
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", apiurl, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(
+          JSON.stringify({
+            title: title.value,
+            description: desc.value,
+            price: price.value,
+            release: release.value,
+          })
+        );
+      });
+    </script>
+  </body>
+</html>
